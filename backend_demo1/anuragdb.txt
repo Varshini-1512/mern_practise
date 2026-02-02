@@ -1,0 +1,209 @@
+>use anuragdb
+<switched to db anuragdb
+>db.createCollection('products')1 
+<{ ok: 1 }
+>show collections
+products
+users
+>db.createCollection('emps')
+{ ok: 1 }
+db.emps.insertOne({eno:67,name:"navya",skills:["js","css","react"],address:{city:"hyderabad",pincode:562147}})
+{
+  acknowledged: true,
+  insertedId: ObjectId('697d800e40b722840939865f')
+}
+> db.emps.find()
+{
+  _id: ObjectId('697d800e40b722840939865f'),
+  eno: 67,
+  name: 'navya',
+  skills: [
+    'js',
+    'css',
+    'react'
+  ],
+  address: {
+    city: 'hyderabad',
+    pincode: 562147
+  }
+}
+> db.emps.findOne({"address.city":"hyderabad"})
+{
+  _id: ObjectId('697d800e40b722840939865f'),
+  eno: 67,
+  name: 'navya',
+  skills: [
+    'js',
+    'css',
+    'react'
+  ],
+  address: {
+    city: 'hyderabad',
+    pincode: 562147
+  }
+}
+> db.emps.findOne({skills:"js"})
+<{
+  _id: ObjectId('697d800e40b722840939865f'),
+  eno: 67,
+  name: 'navya',
+  skills: [
+    'js',
+    'css',
+    'react'
+  ],
+  address: {
+    city: 'hyderabad',
+    pincode: 562147
+  }
+}
+> db.emps.findOne({skills:{$all:['react','js']}})
+< {
+  _id: ObjectId('697d800e40b722840939865f'),
+  eno: 67,
+  name: 'navya',
+  skills: [
+    'js',
+    'css',
+    'react'
+  ],
+  address: {
+    city: 'hyderabad',
+    pincode: 562147
+  }
+}
+db.emps.updateOne({eno:67},{$set:{name:'navya sree'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.emps.updateOne({eno:67},{$set:{"address.street":'uppal'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+> db.emps.find()
+< {
+  _id: ObjectId('697d800e40b722840939865f'),
+  eno: 67,
+  name: 'navya sree',
+  skills: [
+    'js',
+    'css',
+    'react'
+  ],
+  address: {
+    city: 'hyderabad',
+    pincode: 562147,
+    street: 'uppal'
+  }
+}
+> db.emps.updateOne({eno: 67},{$set:{'address.city':'warangal'}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+> db.emps.find()
+{
+  _id: ObjectId('697d800e40b722840939865f'),
+  eno: 67,
+  name: 'navya sree',
+  skills: [
+    'js',
+    'css',
+    'react'
+  ],
+  address: {
+    city: 'warangal',
+    pincode: 562147,
+    street: 'uppal'
+  }
+}
+db.emps.updateOne({eno:67},{$unset:{name:""}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.emps.updateOne({eno:67},{$unset:{'address.pincode':""}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.emps.find()
+{
+  _id: ObjectId('697d800e40b722840939865f'),
+  eno: 67,
+  skills: [
+    'js',
+    'css',
+    'react'
+  ],
+  address: {
+    city: 'warangal',
+    street: 'uppal'
+  }
+}
+db.emps.updateOne({eno:67},{$unset:{firstname:"varshini"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+> db.emps.updateOne({eno:67},{$push:{skills:"angular"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.emps.updateOne({eno:67},{$addToSet:{skills:"angular"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+db.emps.updateOne({eno:67},{$push:{skills:{$each:["java",'nodejs']}}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.emps.find()
+{
+  _id: ObjectId('697d800e40b722840939865f'),
+  eno: 67,
+  skills: [
+    'js',
+    'css',
+    'react',
+    'angular',
+    'java',
+    'nodejs'
+  ],
+  address: {
+    city: 'warangal',
+    street: 'uppal'
+  }
+}

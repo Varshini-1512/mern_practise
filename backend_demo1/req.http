@@ -1,0 +1,61 @@
+GET http://localhost:3000/product-api/products
+
+###
+GET http://localhost:3000/product-api/products-id/100
+
+###
+GET http://localhost:3000/product-api/products-brand/NMR
+###
+POST http://localhost:3000/product-api/product
+Content-Type: application/json
+
+{
+    "id":100,
+    "name":"paper",
+    "price":25,
+    "brand":"Nirmala"
+}
+###
+PUT http://127.0.0.1:3000/product-api/products
+Content-Type: application/json
+
+{
+    "productId":100,
+    "name":"pen",
+    "price":30,
+    "brand":"NMR"
+}
+
+###
+DELETE http://localhost:3000/product-api/products/100
+
+###
+GET http://localhost:3000/user-api/users
+
+###
+GET http://localhost:3000/user-api/users/2
+
+###
+POST http://localhost:3000/user-api/user
+Content-Type: application/json
+
+{
+    "id":4,
+    "name":"VARSHINI",
+    "age":20
+}
+
+###
+PUT http://localhost:3000/user-api/users
+Content-Type: application/json
+
+{
+    "id":2,
+    "name":"Gatla varshini",
+    "age":22
+}
+
+###
+DELETE http://localhost:3000/user-api/users/2
+
+### 
