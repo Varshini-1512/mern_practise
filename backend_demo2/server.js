@@ -2,8 +2,11 @@ import exp from 'express'
 import { userApp } from './APIs/userAPI.js';
 import { productApp } from './APIs/productAPI.js';
 import {connect} from 'mongoose'
-const app=exp();
+import cokkieParser from 'cookie-parser';
 
+const app=exp();
+// add cookie parser middleware
+app.use(cokkieParser());
 //connect to db server
 async function connectDb(){
     try{
@@ -26,3 +29,8 @@ app.listen(PORT,()=>console.log(`HTTP server listening on port ${PORT}`))
 app.use(exp.json())
 app.use('/user-api',userApp)
 app.use('/product-api',productApp)
+
+// global error handling middleware
+app.use((err,req,res,next)=>{
+    res.status(500).json({message:"error occured",errorDetails:err.message})
+})

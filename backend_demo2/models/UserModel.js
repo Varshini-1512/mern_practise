@@ -10,9 +10,7 @@ const userSchema=new Schema({
     },
     password:{
         type:String,
-        required:[true,"password is required"],
-        minlength:[4,"minimum length should be 4"],
-        maxlength:[8,"maximum length exceeded 8"]
+        required:[true,"password is required"]
     },
     age:{
         type:Number,
